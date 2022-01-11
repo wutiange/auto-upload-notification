@@ -1,0 +1,28 @@
+{
+  "script": "./gradlew assemblePreviewRelease -Penvironment=perView",
+  "platform": ["android"],
+  "pgyer": {
+    "upload": {
+      "_api_key": "88c5b39676526740a60730036df09bfa"
+    }
+  },
+  "packageDir": {
+    "android": "/Users/wujingyue/Works/yq-bss-tour-rn/android/app/outputs/preview/release",
+    "ios": ""
+  },
+  "feishu": {
+    "title": "吴敬测试更新",
+    "webhook": "acfb65dc-6151-4ed6-8f00-cb1ad754aaf8",
+    "app_id": "cli_a1478bfe9f78d00b",
+    "app_secret": "WiWHO6m2km6ACU1c3TzcAeun8Qp8yDbU",
+    "message": [
+      "应用名称：${name}",
+      "版本号：${version}",
+      "应用类型：${type}",
+      "更新时间：${updated}",
+      "下载二维码：",
+      "${QRCodeURL}"
+    ],
+    "customize": ""
+  }
+}
