@@ -60,6 +60,10 @@ const getFeishuAppSecret = () => {
 const getFeishuMessage = () => {
   return config.feishu.message;
 }
+// 得到自定义信息
+const getCustomizeMessage = () => {
+  return config.feishu.customize;
+}
 
 module.exports = {
   getScript,
@@ -71,5 +75,6 @@ module.exports = {
   getFeishuMessage,
   getAndroidPackageDir,
   getIosPackageDir,
-  getPlatform
+  getPlatform,
+  getCustomizeMessage
 }

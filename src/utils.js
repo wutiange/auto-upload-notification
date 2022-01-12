@@ -125,9 +125,21 @@ const jsonTemplateReplace = (data, jsonOrString = '') => {
     });
 };
 
+const getBestFormatProgress = (byte) => {
+    const fun = (byte, i, unit) => {
+        if (byte < 100 || i === (unit.length - 1)) {
+            return [byte, unit[i]];
+        }
+        return fun(byte / 1024, i + 1, unit);
+    }
+    return fun(byte, 0, ['byte/s', 'kb/s', 'mb/s', 'gb/s', 'tb/s', 'pb/s'])
+
+}
+
 module.exports = {
     platformActuator,
     getInstallationPackage,
     uppercaseFirst,
-    jsonTemplateReplace
+    jsonTemplateReplace,
+    getBestFormatProgress
 };

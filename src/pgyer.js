@@ -1,22 +1,30 @@
 const https = require('https');
 const fs = require('fs');
+const cliProgress = require('cli-progress');
 const FormData = require('form-data');
-const { getInstallationPackage } = require('./utils');
+const { getInstallationPackage, getBestFormatProgress } = require('./utils');
 const { getPgyerUploadInfo, getPlatform } = require('./config');
-
-// 0b9e7c7b9cf4ace8c41626f6371d2eca
-// 88c5b39676526740a60730036df09bfa
 
 const pgyerUpload = (platform) => {
     return new Promise((resolve, reject) => {
+        // 初始化进度条
+        const bar = new cliProgress.SingleBar({
+            format: `${platform} 平台的上传进度 {bar} {percentage}% {value}/{total} 上传速度为：{speed} 预计完成时间：{eta_formatted}`,
+        }, cliProgress.Presets.shades_classic);
+        // 得到上传信息
         const uploadInfo = getPgyerUploadInfo();
         const form = new FormData();
         Object.entries(uploadInfo).forEach(([key, value]) => {
             form.append(key, value);
         });
+        const path = getInstallationPackage()[platform];
+        // 获取文件的总大小
+        const fileTotalSize = fs.statSync(path).size;
+        // 初始化进度条显示
+        bar.start(fileTotalSize, 0, {speed: "N/A"});
         form.append(
             'file',
-            fs.createReadStream(getInstallationPackage()[platform])
+            fs.createReadStream(path)
         );
         const request = https.request({
             hostname: 'www.pgyer.com',
@@ -26,15 +34,43 @@ const pgyerUpload = (platform) => {
         });
         form.pipe(request);
 
-        request.on('response', (res) => {
+        // 保存进度条数
+        let progressLength = 0;
+        // 记录上一次时间的毫秒数
+        let lastTime = Date.now();
+        form.on("data", (chunk) => {
+            // 当前进度
+            const progressCount = chunk.length;
+            // 更新进度
+            progressLength += progressCount;
+            // 记录当前的时间
+            const currentTime = Date.now();
+            // 记录时间差
+            const experiencedTime = currentTime - lastTime;
+            // 得到当前的速度 byte/s
+            const speed = progressCount / (experiencedTime / 1000);
+            // 根据得到的速度转换成正常的显示
+            const properSpeed = getBestFormatProgress(speed);
+            // 将当前时间保存为上一次的时间
+            lastTime = currentTime;
+            // 更新上传进度条
+            bar.update(progressLength, {speed: `${properSpeed[0].toFixed(2)} ${properSpeed[1]}`});
+        });
+
+        form.once("end", () => {
+            bar.stop();
+            console.log(`${platform} 平台的安装包上传完毕`);
+        });
+
+        request.once('response', (res) => {
             if (res.statusCode !== 200) {
                 reject(res.statusMessage);
             }
             let str = '';
             res.on('data', (data) => {
-                str += data.toString();
+                str += data;
             });
-            res.on('end', () => {
+            res.once('end', () => {
                 const json = JSON.parse(str);
                 if (json.code === 0) {
                     resolve(json.data);
@@ -42,15 +78,18 @@ const pgyerUpload = (platform) => {
                     reject(json.message);
                 }
             });
-            res.on('error', (err) => {
+            res.once('error', (err) => {
                 reject(err);
             });
         });
     });
 };
 
+// 根据平台上传
 const platformUpload = async () => {
+    // 得到所有的平台信息
     const platforms = getPlatform();
+    // 用于保存安装包路径
     const packageInfos = [];
     if (Array.isArray(platforms)) {
         for (let i = 0; i < platforms.length; i++) {

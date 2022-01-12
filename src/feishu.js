@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 const https = require('https');
-const { getFeishuMessage, getFeishuMessageTitle } = require('./config');
+const { getFeishuMessage, getFeishuMessageTitle, getCustomizeMessage } = require('./config');
 const { jsonTemplateReplace } = require('./utils');
 const uploadFeishuImage = (accessToken, imgFile) => {
     return new Promise((resolve, reject) => {
@@ -61,8 +61,15 @@ const handleQRCode = async (phyerInfo = {}, accessToken, imgFile) => {
 };
 
 const getMessage = (packageInfo) => {
+    // 看看有没有配置 customize 属性，配置了优先这个属性
+    const customizeMessage = getCustomizeMessage() || "";
+    if (customizeMessage.length > 0) {
+        return jsonTemplateReplace(packageInfo, customizeMessage)
+    }
+    // 拿到用户自定义的信息
     const initMessage = getFeishuMessage();
     const preMessage = initMessage.map((msg) => {
+        // 替换模板字符串，替换成具体的值
         const temp = jsonTemplateReplace(packageInfo, msg);
         if (temp.indexOf('img_') === -1) {
             return [
@@ -131,10 +138,30 @@ const getTenantAccessToken = (appId, appSecret) => {
     });
 };
 
+const checkHaveQRCode = () => {
+    // 首先看有没有传入自定义消息
+    const customizeMessage = getCustomizeMessage() || "";
+    if (customizeMessage.length > 0) {
+        if (customizeMessage.includes("QRCodeURL") || customizeMessage.includes("qRCodeURL")) {
+            return true;
+        }
+        return false;
+    }
+    // 再看 message
+    const message = getFeishuMessage();
+    for (let i = 0; i < message.length; i ++) {
+        if (message[i].indexOf("QRCodeURL") === 0 || message[i].indexOf("qRCodeURL")) {
+            return true;
+        }
+    }
+    return false;
+}
+
 module.exports = {
     handleQRCode,
     feishuSendMessage,
     uploadFeishuImage,
     getMessage,
     getTenantAccessToken,
+    checkHaveQRCode
 };
