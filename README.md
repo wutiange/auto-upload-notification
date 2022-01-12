@@ -83,7 +83,7 @@
 
 显示的效果如下：
 
-![image-20220104112500119.png](https://cdn.jsdelivr.net/gh/wutiange/assets@master/images/image-20220104112500119.6z05mk6ztlw0.webp)
+![image-20220104112500119.png](https://cdn.jsdelivr.net/gh/wutiange/assets@master/images/image-20220104112500119.5da66um3s1c0.webp)
 
 其中二维码只能单独占一行，也就是上面的 `"${QRCodeURL}"`，message 中的二维码只能独占一行，如果想更加自定义消息格式，请使用 customize 属性。
 
