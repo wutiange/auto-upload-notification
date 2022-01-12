@@ -44,25 +44,25 @@
 
 ```json
 {
-    buildKey: 'Build Key是唯一标识应用的索引ID',
-    buildType: '应用类型（1:iOS; 2:Android）',
-    buildIsFirst: '是否是第一个App（1:是; 2:否）',
-    buildIsLastest: '是否是最新版（1:是; 2:否）',
-    buildFileName: '应用名称',
-    buildFileSize: 'App 文件大小',
-    buildName: '应用名称',
-    buildVersion: '版本号, 默认为1.0 (是应用向用户宣传时候用到的标识，例如：1.1、8.2.1等。)',
-    buildVersionNo: '上传包的版本编号，默认为1 (即编译的版本号，一般来说，编译一次会变动一次这个版本号, 在 Android 上叫 Version Code。对于 iOS 来说，是字符串类型；对于 Android 来说是一个整数。例如：1001，28等。)',
-    buildBuildVersion: '蒲公英生成的用于区分历史版本的build号',
-    buildIdentifier: '应用程序包名，iOS为BundleId，Android为包名',
-    buildIcon: '应用的Icon图标key，访问地址为 https://www.pgyer.com/image/view/app_icons/[应用的Icon图标key]',
-    buildDescription: '应用介绍',
-    buildUpdateDescription: '应用更新说明',
-    buildScreenshots: '应用截图的key，获取地址为https://www.pgyer.com/image/view/app_screenshots/[应用截图的key]',
-    buildShortcutUrl: '应用短链接',
-    buildCreated: '应用上传时间',
-    buildUpdated: '应用更新时间',  			
-    buildQRCodeURL:'应用二维码地址',
+    "buildKey": "Build Key是唯一标识应用的索引ID",
+    "buildType": "应用类型（1:iOS; 2:Android）",
+    "buildIsFirst": "是否是第一个App（1:是; 2:否）",
+    "buildIsLastest": "是否是最新版（1:是; 2:否）",
+    "buildFileName": "应用名称",
+    "buildFileSize": "App 文件大小",
+    "buildName": "应用名称",
+    "buildVersion": "版本号, 默认为1.0 (是应用向用户宣传时候用到的标识，例如：1.1、8.2.1等。)",
+    "buildVersionNo": "上传包的版本编号，默认为1 (即编译的版本号，一般来说，编译一次会变动一次这个版本号, 在 Android 上叫 Version Code。对于 iOS 来说，是字符串类型；对于 Android 来说是一个整数。例如：1001，28等。)",
+    "buildBuildVersion": "蒲公英生成的用于区分历史版本的build号",
+    "buildIdentifier": "应用程序包名，iOS为BundleId，Android为包名",
+    "buildIcon": "应用的Icon图标key，访问地址为 https://www.pgyer.com/image/view/app_icons/[应用的Icon图标key]",
+    "buildDescription": "应用介绍",
+    "buildUpdateDescription": "应用更新说明",
+    "buildScreenshots": "应用截图的key，获取地址为https://www.pgyer.com/image/view/app_screenshots/[应用截图的key]",
+    "buildShortcutUrl": "应用短链接",
+    "buildCreated": "应用上传时间",
+    "buildUpdated": "应用更新时间",
+    "buildQRCodeURL":"应用二维码地址",
 }
 ```
 
@@ -98,7 +98,7 @@
 
 下面是效果图：
 
-![image-20220112153641287](https://static01.imgkr.com/temp/48bc3f4470ec458b8fe4976d7d79b59a.png)
+![image-20220112153641287](https://static01.imgkr.com/temp/e5814f02ba3346228dd655416c654971.png)
 
 ## 常见的错误
 
