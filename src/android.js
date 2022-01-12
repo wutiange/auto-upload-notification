@@ -2,7 +2,10 @@ const {spawn} = require('child_process')
 const config = require('./config')
 const Log = require('./log');
 const generateApk = () => new Promise((resolve, reject) => {
-  const script = config.getScript();
+  const script = config.getScript() || "";
+  if (script.length === 0) {
+    return;
+  }
   const gradlew = spawn(script[0], script.slice(1));
   gradlew.stdout.on('data', (data) => {
     Log.info(data.toString());
