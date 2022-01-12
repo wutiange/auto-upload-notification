@@ -82,7 +82,7 @@
 ```
 
 显示的效果如下：
-![image-20220104112500119.png](https://s2.loli.net/2022/01/12/NJb3Yro4xCcy1Zk.png)
+![image-20220104112500119.png](https://cdn.jsdelivr.net/gh/wutiange/assets@master/images/image-20220104112500119.6z05mk6ztlw0.webp)
 
 其中二维码只能单独占一行，也就是上面的 `"${QRCodeURL}"`，message 中的二维码只能独占一行，如果想更加自定义消息格式，请使用 customize 属性。
 
@@ -96,7 +96,7 @@
 
 
 下面是效果图：
-![image-20220112153641287.png](https://s2.loli.net/2022/01/12/NpEt8zlJmZoQ6AK.png)
+![image-20220112153641287.png](https://cdn.jsdelivr.net/gh/wutiange/assets@master/images/image-20220112153641287.3b6s5knpvtk0.webp)
 
 
 ## 常见的错误
