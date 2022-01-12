@@ -19,7 +19,7 @@ const getPlatform = () => {
 
 // 得到 android 的打包脚本
 const getScript = () => {
-  const script = config.script;
+  const script = config.script || '';
   let scriptArr = [];
   let size = script.length;
   let lastStart = 0;

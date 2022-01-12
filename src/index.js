@@ -10,6 +10,7 @@ const { handleQRCode, feishuSendMessage, getMessage, getTenantAccessToken, check
     // 上传安装包到蒲公英并得到安装包信息
     const packages = await platformUpload();
     for (let i = 0; i < packages.length; i ++) {
+        Log.info(`正在处理 ${packages[i]?.buildType} 发送到飞书的信息。。。`);
         // 看用户是否需要显示二维码
         if (checkHaveQRCode()) {
             // 首先拿到 app_id app_secret
@@ -20,6 +21,6 @@ const { handleQRCode, feishuSendMessage, getMessage, getTenantAccessToken, check
         }
         const message = getMessage(packages[i]);
         await feishuSendMessage(getFeishuWebHook(), message);
-        Log.success("消息发送成功");
+        Log.success(`${packages[i]?.buildType} 的消息已经成功发送。`);
     }
 })();
