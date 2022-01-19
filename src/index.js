@@ -7,6 +7,7 @@ const { handleQRCode, feishuSendMessage, getMessage, getTenantAccessToken, check
 (async () => {
     // 对 android 进行打包操作
     await generateApk();
+    Log.success('android 打包成功');
     // 上传安装包到蒲公英并得到安装包信息
     const packages = await platformUpload();
     for (let i = 0; i < packages.length; i ++) {

@@ -18,13 +18,9 @@ const platformActuator = ({ android, ios, all }) => {
             all();
         }
     };
-    if (Array.isArray(currentPlatform)) {
-        currentPlatform.forEach((platform) => {
-            judge(platform);
-        });
-    } else {
-        judge(currentPlatform);
-    }
+    currentPlatform.forEach((platform) => {
+        judge(platform);
+    });
 };
 
 const getInstallationPackage = () => {
@@ -82,7 +78,7 @@ const readFilesByDir = (dir, callback = () => {}) => {
         const newFile = dir + '/' + file;
         const stat = fs.lstatSync(newFile);
         if (stat.isDirectory()) {
-            readFilesByDir(newFile);
+            readFilesByDir(newFile, callback);
         } else {
             callback(newFile, stat);
         }
@@ -125,6 +121,11 @@ const jsonTemplateReplace = (data, jsonOrString = '') => {
     });
 };
 
+/**
+ * 根据字节大小返回合适的显示方式 [100, 'kb/s']
+ * @param {Number} byte 字节大小
+ * @returns Array
+ */
 const getBestFormatProgress = (byte) => {
     const fun = (byte, i, unit) => {
         if (byte < 1000 || i === (unit.length - 1)) {
@@ -132,8 +133,25 @@ const getBestFormatProgress = (byte) => {
         }
         return fun(byte / 1024, i + 1, unit);
     }
-    return fun(byte, 0, ['byte/s', 'kb/s', 'mb/s', 'gb/s', 'tb/s', 'pb/s'])
+    return fun(byte, 0, ['byte/s', 'kb/s', 'mb/s', 'gb/s', 'tb/s', 'pb/s']);
+}
 
+const compareVersionNumber = (currentVersion = "", referVersion = "") => {
+    const curSplit = currentVersion.split(".").map(v => v - 0);
+    const refSplit = referVersion.split(".").map(v => v - 0);
+    console.log("curSplit", curSplit);
+    console.log("refSplit", refSplit);
+    if (curSplit[0] > refSplit[0]) {
+        return curSplit[0] - refSplit[0];
+    } else if (curSplit[0] < refSplit[0]) {
+        return curSplit[0] - refSplit[0];
+    } else {
+        if (curSplit[1] > refSplit[1]) {
+            return curSplit[1] - refSplit[1];
+        } else {
+            return curSplit[2] - refSplit[2];
+        }
+    }
 }
 
 module.exports = {
@@ -141,5 +159,6 @@ module.exports = {
     getInstallationPackage,
     uppercaseFirst,
     jsonTemplateReplace,
-    getBestFormatProgress
+    getBestFormatProgress,
+    compareVersionNumber,
 };

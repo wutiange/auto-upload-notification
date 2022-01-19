@@ -67,6 +67,7 @@ const pgyerUpload = (platform) => {
         }, 500)
 
         form.once("end", () => {
+            bar.update(fileTotalSize, {speed: '0 kb/s'});
             bar.stop();
             clearInterval(timer);
             Log.success(`${platform} 平台的安装包上传完毕`);
@@ -102,12 +103,8 @@ const platformUpload = async () => {
     const platforms = getPlatform();
     // 用于保存安装包路径
     const packageInfos = [];
-    if (Array.isArray(platforms)) {
-        for (let i = 0; i < platforms.length; i++) {
-            packageInfos.push(await pgyerUpload(platforms[i]));
-        }
-    } else {
-        packageInfos.push(await pgyerUpload(platforms));
+    for (let i = 0; i < platforms.length; i++) {
+        packageInfos.push(await pgyerUpload(platforms[i]));
     }
     return packageInfos;
 };

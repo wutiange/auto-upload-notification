@@ -1,4 +1,5 @@
 {
+  "script": "./gradlew assemblePreviewRelease -Penvironment=perView",
   "platform": ["android"],
   "pgyer": {
     "upload": {
@@ -8,6 +9,9 @@
   "packageDir": {
     "android": "/Users/wujingyue/Works/yq-bss-tour-rn/android/app/outputs/preview/release",
     "ios": "/Users/wujingyue/Desktop"
+  },
+  "projectDir": {
+    "android": "/Users/wujingyue/Works/toureaseandroid/"
   },
   "feishu": {
     "title": "吴敬测试更新",

@@ -3,6 +3,7 @@
  */
 
 const config = require('../auto.json');
+const package = require('../package.json');
 
 // 得到 android 的安装包路径
 const getAndroidPackageDir = () => {
@@ -14,7 +15,10 @@ const getIosPackageDir = () => {
 }
 // 得到当前的平台是 android ，还是 ios ，或者 all
 const getPlatform = () => {
-  return config.platform;
+  if (Array.isArray(config.platform)) {
+    return config.platform.map((p) => p.toLowerCase())
+  }
+  return [config.platform.toLowerCase()];
 }
 
 // 得到 android 的打包脚本
@@ -65,6 +69,22 @@ const getCustomizeMessage = () => {
   return config.feishu.customize;
 }
 
+
+// 得到当前的脚本的版本信息
+const getVersion = () => {
+  return package.version;
+}
+
+// 得到 android 项目地址
+const getAndroidProjectDir = () => {
+  return config.projectDir.android
+}
+
+// 得到 ios 项目地址
+const getIosProjectDir = () => {
+  return config.projectDir.ios
+}
+
 module.exports = {
   getScript,
   getPgyerUploadInfo,
@@ -76,5 +96,8 @@ module.exports = {
   getAndroidPackageDir,
   getIosPackageDir,
   getPlatform,
-  getCustomizeMessage
+  getCustomizeMessage,
+  getVersion,
+  getAndroidProjectDir,
+  getIosProjectDir
 }
