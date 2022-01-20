@@ -139,8 +139,6 @@ const getBestFormatProgress = (byte) => {
 const compareVersionNumber = (currentVersion = "", referVersion = "") => {
     const curSplit = currentVersion.split(".").map(v => v - 0);
     const refSplit = referVersion.split(".").map(v => v - 0);
-    console.log("curSplit", curSplit);
-    console.log("refSplit", refSplit);
     if (curSplit[0] !== refSplit[0]) {
         return curSplit[0] - refSplit[0];
     } else if (curSplit[1] !== refSplit[1]) {
