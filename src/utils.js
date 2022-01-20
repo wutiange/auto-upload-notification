@@ -141,16 +141,12 @@ const compareVersionNumber = (currentVersion = "", referVersion = "") => {
     const refSplit = referVersion.split(".").map(v => v - 0);
     console.log("curSplit", curSplit);
     console.log("refSplit", refSplit);
-    if (curSplit[0] > refSplit[0]) {
+    if (curSplit[0] !== refSplit[0]) {
         return curSplit[0] - refSplit[0];
-    } else if (curSplit[0] < refSplit[0]) {
-        return curSplit[0] - refSplit[0];
+    } else if (curSplit[1] !== refSplit[1]) {
+        return curSplit[1] - refSplit[1];
     } else {
-        if (curSplit[1] > refSplit[1]) {
-            return curSplit[1] - refSplit[1];
-        } else {
-            return curSplit[2] - refSplit[2];
-        }
+        return curSplit[2] - refSplit[2];
     }
 }
 

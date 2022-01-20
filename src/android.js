@@ -17,9 +17,8 @@ const generateApk = () =>
             resolve();
             return;
         }
-        console.log(compareVersionNumber(config.getVersion(), "2.0.0"))
         // 先切换到项目下，前提的是 2.0.0 版本以后才支持
-        if (compareVersionNumber(config.getVersion(), "2.0.0")) {
+        if (compareVersionNumber(config.getVersion(), "2.0.0") >= 0) {
             chdir(config.getAndroidProjectDir());
         }
         const gradlew = spawn(script[0], script.slice(1));

@@ -1,6 +1,6 @@
 {
   "name": "auto-upload-notification",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "用于自动打包上传到蒲公英的，并且支持发送到飞书等办公软件",
   "main": "src/index.js",
   "scripts": {
