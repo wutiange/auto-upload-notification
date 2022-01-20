@@ -19,6 +19,7 @@ const pgyerUpload = (platform) => {
             form.append(key, value);
         });
         const path = getInstallationPackage()[platform];
+        Log.info(`待上传到蒲公英的安装包为：${path}`);
         // 获取文件的总大小
         const fileTotalSize = fs.statSync(path).size;
         // 初始化进度条显示
