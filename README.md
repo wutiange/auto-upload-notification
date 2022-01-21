@@ -29,6 +29,7 @@ git clone https://github.com/wutiange/auto-upload-notification.git
 git clone git@github.com:wutiange/auto-upload-notification.git
 ~~~
 2. 安装 nodejs
+
 如果你已经下载 nodejs 忽略这步，否则你需要先去 nodejs 的官网下载，然后按步骤安装，安装很简单只需要一直下一步即可。
 然后打开 clone 下来的目录，执行：
 ```shell
@@ -41,10 +42,12 @@ npm i
 打开项目下的 `auto.json` 文件，然后参照下面的（二）中的属性说明进行对应更改和配置。
 
 4. 使用
+
 （1）如果你是用于 android 项目
 - 在 1.0.0 <= version ，那么需要将项目放到 android 的项目下，然后在 android 项目下的 .gitignore 中忽略这些内容。
 - 在 1.0.0 < version < 2.0.0 ，那么只需要将 package.json 文件中的 version 更改成 2.0.0 。
 - 在 version >= 2.0.0 不用做任何操作。
+（2）ios 需要先将包打完，并且第三步配置好。
 然后在 clone 的项目下执行：
 ```shell
 node src/index.js
