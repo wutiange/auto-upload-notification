@@ -14,11 +14,45 @@
 - [x] 新增配置项目地址，这样在任何地方执行都可以，无需弄到项目下，等待 2.0 完成即可使用（代码完成）
 - [ ] 支持发送到钉钉
 
+- 3.0 版本的内容
 
+- [ ] 模块化项目，本项目只包含核心模块，其余用户可以根据第三方插件灵活配置
+- [ ] 独立蒲公英模块，飞书模块，钉钉模块
+- [ ] 开发微信小程序模块，让微信小程序也能实现自动化测试发布
 
-## 以下是目前版本的相关说明和解释（1.0）
+## （一）怎么使用
 
-*必须在 android 项目下才能进行打包。*
+1. 将项目 clone 下来：
+~~~shell
+git clone https://github.com/wutiange/auto-upload-notification.git
+或
+git clone git@github.com:wutiange/auto-upload-notification.git
+~~~
+2. 安装 nodejs
+如果你已经下载 nodejs 忽略这步，否则你需要先去 nodejs 的官网下载，然后按步骤安装，安装很简单只需要一直下一步即可。
+然后打开 clone 下来的目录，执行：
+```shell
+npm install
+或
+npm i
+```
+3. 配置
+
+打开项目下的 `auto.json` 文件，然后参照下面的（二）中的属性说明进行对应更改和配置。
+
+4. 使用
+（1）如果你是用于 android 项目
+- 在 1.0.0 <= version ，那么需要将项目放到 android 的项目下，然后在 android 项目下的 .gitignore 中忽略这些内容。
+- 在 1.0.0 < version < 2.0.0 ，那么只需要将 package.json 文件中的 version 更改成 2.0.0 。
+- 在 version >= 2.0.0 不用做任何操作。
+然后在 clone 的项目下执行：
+```shell
+node src/index.js
+```
+这样就成功了，如果遇到问题，可以先参考下面的常见问题，如果没有，并且自己没办法解决，希望能提 issue 。
+## （二）以下是目前版本的相关说明和解释（1.0）
+
+*必须在 android 项目下才能进行打包。ios 需要先打好包*
 
 1. script 属性，android 必须指定执行脚本，也就是 `auto.json` 文件中的 `script` 属性； iOS 由于都是使用工具打包，所以如果仅仅是 ios ，那么就不需要指定。
 
@@ -94,6 +128,9 @@
 
 由于有时候打包后的名称并不是固定的，所以我采用指定文件夹的方式来进行上传，会自动取文件夹下创建时间最近的那一个文件。
 
+6. projectDir 属性，项目地址 **v2.0.0支持**
+
+只要配置了这个属性，那么就不需要将这个项目放入 android 项目下了，从 1.1.0 就已经包含代码，但是要在 2.0.0 中才能使用。也可以下载下来以后改一下 package.json 中的 version 版本号来实现自动打包上传。
 
 
 下面是效果图：
@@ -101,7 +138,7 @@
 ![image-20220112153641287.png](https://cdn.jsdelivr.net/gh/wutiange/assets@master/images/image-20220112153641287.3b6s5knpvtk0.webp)
 
 
-## 常见的错误
+## （三）常见的问题总结
 
 1. 并没有在项目下执行。
 
@@ -134,5 +171,5 @@ Emitted 'error' event on ChildProcess instance at:
 
 
 
-## 有疑问的地方请提 issue
+## （四）有疑问的地方请提 issue
 
