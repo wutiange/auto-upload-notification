@@ -110,7 +110,33 @@ const platformUpload = async () => {
     return packageInfos;
 };
 
+// 下载蒲公英生成的二维码
+const downloadQRCode = (qrcodeUrl) => {
+    return new Promise((resolve, reject) => {
+        const req = https.get(qrcodeUrl);
+
+        req.on("response", (res) => {
+            if (res.statusCode !== 200) {
+                reject("下载二维码失败");
+                return;
+            }
+            const qrcode = fs.createWriteStream("QR-code.png");
+            res.on("data", (chunk) => {
+                qrcode.write(chunk);
+            });
+            res.on("close", () => {
+                qrcode.close();
+                resolve();
+            });
+            res.on("error", (error) => {
+                reject("下载二维码过程中出现了错误", error.message);
+            });
+        });
+    });
+}
+
 module.exports = {
     pgyerUpload,
     platformUpload,
+    downloadQRCode,
 };
