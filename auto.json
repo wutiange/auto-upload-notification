@@ -3,15 +3,15 @@
   "platform": ["android"],
   "pgyer": {
     "upload": {
-      "_api_key": "88c5b39676526740a60730036df09bfa"
+      "_api_key": "0002baa3e41cd0a54ad0cae514da36ac"
     }
   },
   "packageDir": {
-    "android": "/Users/wujingyue/Works/toureaseandroid/app/build/outputs",
+    "android": "/Users/seeed/Work/sensecap-hotspot-app/android/app",
     "ios": "/Users/wujingyue/Desktop"
   },
   "projectDir": {
-    "android": "/Users/wujingyue/Works/toureaseandroid/"
+    "android": "/Users/seeed/Work/sensecap-hotspot-app/android"
   },
   "feishu": {
     "title": "应用更新了，快来测试吧",
@@ -24,6 +24,18 @@
       "应用类型：${type}",
       "更新时间：${updated}",
       "下载二维码：",
+      "${QRCodeURL}"
+    ],
+    "customize": ""
+  },
+  "qyweixin": {
+    "title": "应用更新了，快来测试吧",
+    "webhook": "46aaa4c8-4475-4cf2-b868-7b31dfdcc8c4",
+    "message": [
+      "应用名称：${name}",
+      "版本号：${version}",
+      "应用类型：${type}",
+      "更新时间：${updated}",
       "${QRCodeURL}"
     ],
     "customize": ""

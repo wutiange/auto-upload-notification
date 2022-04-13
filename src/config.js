@@ -68,6 +68,19 @@ const getFeishuMessage = () => {
 const getCustomizeMessage = () => {
   return config.feishu.customize;
 }
+// 得到企业微信自定义信息
+const getQyweixinMessage = () => {
+  return config.qyweixin.message
+}
+
+// 得到企业微信标题
+const getQyweixinMessageTitle = () => {
+  return config.qyweixin.title
+}
+// 得到企业微信机器人的 webhook
+const getQyweixinWebHook = () => {
+  return config.qyweixin.webhook
+}
 
 
 // 得到当前的脚本的版本信息
@@ -93,6 +106,9 @@ module.exports = {
   getFeishuAppId,
   getFeishuAppSecret,
   getFeishuMessage,
+  getQyweixinMessageTitle,
+  getQyweixinMessage,
+  getQyweixinWebHook,
   getAndroidPackageDir,
   getIosPackageDir,
   getPlatform,
