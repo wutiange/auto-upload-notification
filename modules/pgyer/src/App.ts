@@ -6,6 +6,7 @@ import path, { getUrl } from './path';
 import FormData from 'form-data';
 import np from 'path'
 import fs from 'fs'
+import { AxiosError } from 'axios';
 
 export default class App {
   private apiKey = ''
@@ -19,7 +20,8 @@ export default class App {
       return this.cosToken
     }
     const body = qs.stringify(params)
-    const response = await axios.post<PgyerResponse<COSTokenBean>>(getUrl(path.getCOSToken), body, {
+    const url = getUrl(path.getCOSToken)
+    const response = await axios.post<PgyerResponse<COSTokenBean>>(url, body, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Content-Length': body.length
@@ -31,23 +33,29 @@ export default class App {
 
   async upload(filePath: string, params?: COSTokenReqParams) {
     const fileExt = np.extname(filePath).slice(1);
-    params = params || { _api_key: this.apiKey, buildType: fileExt as BuildType }
+    params = Object.assign(params || {}, { _api_key: this.apiKey, buildType: fileExt as BuildType })
     const tokenResponse = await this.getCOSToken(params)
 
     const uploadUrl = tokenResponse.endpoint;
     const formData = new FormData();
-    formData.append('key', tokenResponse.key);
-    formData.append('file', fs.createReadStream(filePath));
     formData.append('signature', tokenResponse.params.signature);
     formData.append('x-cos-security-token', tokenResponse.params['x-cos-security-token']);
+    formData.append('key', tokenResponse.params.key);
     formData.append('x-cos-meta-file-name', np.basename(filePath));
-    const uploadResponse = await axios.post(uploadUrl, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+    formData.append('file', fs.createReadStream(filePath));
+    return new Promise((resolve, reject) => {
+      formData.submit(uploadUrl, (err, res) => {
+        if (err) {
+          reject(err)
+          return
+        }
+        if (res.statusCode === 204) {
+          resolve('ok')
+        } else {
+          reject(new AxiosError('Upload Error!', res.statusCode?.toString()))
+        }
+      })
     })
-    console.log(uploadResponse.data)
-    return uploadResponse.data
   }
 
 }
