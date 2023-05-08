@@ -1,0 +1,14 @@
+{
+  "name": "@wutiange/qs",
+  "version": "0.0.1",
+  "description": "处理url最简单的库",
+  "main": "index.js",
+  "author": "wutiange",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
