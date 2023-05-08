@@ -1,5 +1,5 @@
-import { BuildType, COSTokenBean, COSTokenReqParams } from './types/app';
-import { PgyerResponse } from './types/type';
+import { BuildType, COSTokenBean, COSTokenReqParams } from '../types/app';
+import { PgyerResponse } from '../types/type';
 import axios from 'axios'
 import * as qs from '@wutiange/qs'
 import path, { getUrl } from './path';

@@ -3,8 +3,10 @@
   "display": "Node 16",
 
   "compilerOptions": {
+    "baseUrl": ".",
     "lib": ["es2021"],
-    "module": "commonjs",
+    "module": "esnext",
+    "rootDir": ".",
     "target": "es2021",
     "declaration": true,
     "strict": true,
@@ -12,7 +14,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "outDir": "."
+    "paths": {
+      "dist/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
