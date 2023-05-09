@@ -1,7 +1,5 @@
 import { Request, Response } from 'express'
-import axios, { AxiosError } from 'axios'
-import * as qs from '@wutiange/qs'
-import { COSTokenBean, COSTokenParams, PgyerResponse } from '../types/pgyer'
+import { AxiosError } from 'axios'
 import Pgyer from '@wutiange/pgyer'
 
 
@@ -16,7 +14,6 @@ export async function upload(req: Request, res: Response) {
     res.send(updateResponse)
   } catch (err) {
     const error = err as AxiosError
-    console.log(error.message, '-----error.message-----', error)
     res.status(500).send(error.message)
   }
 }
