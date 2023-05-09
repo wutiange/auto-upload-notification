@@ -6,7 +6,8 @@
   "author": "wutiange",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "postinstall": "yarn link @wutiange/qs"
   },
   "devDependencies": {
     "typescript": "^5.0.4"

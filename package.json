@@ -4,6 +4,8 @@
   "description": "用于管理软件包的工具,包括更新版本号,热更新等",
   "main": "src/app.js",
   "scripts": {
+    "preinstall": "sh ./scripts/preinstall.sh",
+    "postinstall": "sh ./scripts/postinstall.sh",
     "dev": "nodemon -r dotenv/config --exec ts-node ./src/app.ts"
   },
   "keywords": [],
