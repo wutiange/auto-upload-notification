@@ -5,8 +5,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "lib": ["es2021"],
-    "module": "esnext",
-    "rootDir": ".",
+    "module": "commonjs",
     "target": "es2021",
     "declaration": true,
     "strict": true,
@@ -14,10 +13,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
+    "outDir": "dist",
+    "sourceMap": true,
     "paths": {
-      "dist/*": ["./src/*"]
+      "*": ["./types/*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

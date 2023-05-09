@@ -1,6 +1,5 @@
 import Pgyer from "./servers/Pgyer";
 
 
-export * from './types/app'
-export * from './types/type'
+export * from './types'
 export default Pgyer;
